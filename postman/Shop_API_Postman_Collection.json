@@ -1,0 +1,104 @@
+{
+  "info": {
+    "name": "Shop API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Products",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/products"
+      }
+    },
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Monitor\",\n  \"price\": 250.0,\n  \"quantity\": 10,\n  \"type\": \"ELECTRONICS\"\n}"
+        },
+        "url": "http://localhost:8080/products"
+      }
+    },
+    {
+      "name": "Get Product By ID",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/products/1"
+      }
+    },
+    {
+      "name": "Add Product To Cart",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n \"customerId\": 1,\n \"products\": [1]\n}"
+        },
+        "url": "http://localhost:8080/cart/add"
+      }
+    },
+    {
+      "name": "Get Cart",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/cart/1"
+      }
+    },
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:8080/orders/1"
+      }
+    },
+    {
+      "name": "Checkout CARD",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": 1,\n  \"paymentMethod\": \"CARD\"\n}"
+        },
+        "url": "http://localhost:8080/checkout"
+      }
+    },
+    {
+      "name": "Checkout CASH",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": 2,\n  \"paymentMethod\": \"CASH\"\n}"
+        },
+        "url": "http://localhost:8080/checkout"
+      }
+    }
+  ]
+}
