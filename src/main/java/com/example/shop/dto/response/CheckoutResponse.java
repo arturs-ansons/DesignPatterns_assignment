@@ -14,4 +14,5 @@ public class CheckoutResponse {
     private PaymentMethod paymentMethod;
     private OrderStatus orderStatus;
     private boolean paid;
+    private String notification;
 }

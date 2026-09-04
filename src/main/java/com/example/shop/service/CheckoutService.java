@@ -6,7 +6,8 @@ import com.example.shop.dto.response.CheckoutResponse;
 import com.example.shop.entity.Order;
 import com.example.shop.enums.OrderStatus;
 import com.example.shop.factory.PaymentFactory;
-import com.example.shop.observer.CustomerObserver;
+import com.example.shop.observer.Observable;
+import com.example.shop.observer.SmsObserver;
 import com.example.shop.repository.OrderRepository;
 import com.example.shop.strategy.PaymentStrategy;
 import lombok.RequiredArgsConstructor;
@@ -34,19 +35,22 @@ public class CheckoutService {
 
         command.execute();
 
-        CustomerObserver observer = new CustomerObserver();
-        observer.update("Order paid successfully");
+        Observable notificationService = new Observable();
+        notificationService.addObserver(new SmsObserver());
 
         order.setStatus(OrderStatus.PAID);
 
         Order saved = orderRepository.save(order);
+
+        notificationService.notifyObservers("Order #" + saved.getId() + " has been paid");
 
         return new CheckoutResponse(
                 saved.getId(),
                 saved.getCustomer().getId(),
                 request.getPaymentMethod(),
                 saved.getStatus(),
-                true
+                true,
+                "SMS notification sent"
         );
     }
 }
